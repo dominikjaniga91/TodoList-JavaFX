@@ -3,6 +3,7 @@ package todolist.model;
 import javafx.collections.FXCollections;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -49,6 +50,22 @@ public class TodoData {
                 items.add(item);
             }
         } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void storeTodoItemsInFile(){
+        Path path = Paths.get(fileName);
+
+        try(BufferedWriter writer = Files.newBufferedWriter(path)) {
+            for (TodoItem item : items) {
+                writer.write(String.format("%s\t%s\t%s\t%s", item.getTitle(),
+                        item.getDescription(),
+                        item.getCreateDate(),
+                        item.getDeadline()));
+                writer.newLine();
+            }
+        } catch (IOException ex){
             System.out.println(ex.getMessage());
         }
     }
