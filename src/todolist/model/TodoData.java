@@ -35,7 +35,7 @@ public class TodoData {
         this.items = items;
     }
 
-    public void loadTodoItems() {
+    public void loadTodoItemsFromFile() {
         items = FXCollections.observableArrayList();
         Path path = Paths.get(fileName);
         String line;
