@@ -47,4 +47,9 @@ public class TodoItem {
     public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }
