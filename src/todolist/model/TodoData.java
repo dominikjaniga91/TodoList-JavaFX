@@ -17,14 +17,12 @@ public class TodoData {
     private static TodoData instance = new TodoData();
     private static String fileName = "TodoListItems.txt";
     private List<TodoItem> items;
-    private DateTimeFormatter formatter;
-
 
     public static TodoData getInstance(){
         return instance;
     }
     private TodoData(){
-        formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
     }
 
     public List<TodoItem> getItems() {
@@ -44,8 +42,8 @@ public class TodoData {
                 String[] fileItems = line.split("\t");
                 String title = fileItems[0];
                 String description = fileItems[1];
-                LocalDateTime created = LocalDateTime.parse(fileItems[2], formatter);
-                LocalDateTime deadline = LocalDateTime.parse(fileItems[3], formatter);
+                LocalDateTime created = LocalDateTime.parse(fileItems[2]);
+                LocalDateTime deadline = LocalDateTime.parse(fileItems[3]);
                 TodoItem item = new TodoItem(title, description, created, deadline);
                 items.add(item);
             }
