@@ -25,6 +25,11 @@ public class Main extends Application {
     }
 
     @Override
+    public void init() throws Exception {
+        TodoData.getInstance().loadTodoItemsFromFile();
+    }
+
+    @Override
     public void stop() {
         TodoData.getInstance().storeTodoItemsInFile();
     }
