@@ -1,11 +1,18 @@
 
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane fx:controller="todolist.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <left>
-        <ListView fx:id="listView">
+        <ListView fx:id="listView" onMouseClicked="#handleClickListView" editable="true">
 
         </ListView>
     </left>
+    <center>
+        <VBox>
+            <TextArea style="-fx-control-inner-background:#99ffcc;" fx:id="itemTextArea"/>
+        </VBox>
+    </center>
 </BorderPane>
