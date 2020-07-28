@@ -7,6 +7,7 @@ import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextArea;
 import todolist.model.TodoItem;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Controller {
@@ -32,6 +33,8 @@ public class Controller {
                 if(newValue != null){
                     TodoItem item = listView.getSelectionModel().getSelectedItem();
                     itemTextArea.setText(item.getTitle());
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    deadlineLabel.setText(formatter.format(item.getDeadline()));
                 }
         });
         listView.getItems().setAll(items);
