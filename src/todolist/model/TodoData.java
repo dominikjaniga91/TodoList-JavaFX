@@ -21,16 +21,12 @@ public class TodoData {
     public static TodoData getInstance(){
         return instance;
     }
-    private TodoData(){
 
+    private TodoData(){
     }
 
     public List<TodoItem> getItems() {
         return items;
-    }
-
-    public void setItems(List<TodoItem> items) {
-        this.items = items;
     }
 
     public void loadTodoItemsFromFile() {
