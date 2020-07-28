@@ -25,14 +25,17 @@ public class Controller {
         TodoItem item6 = new TodoItem("Clean yur room", null, LocalDateTime.now(), LocalDateTime.now().plusDays(6));
 
         items = List.of(item1, item2, item3, item4, item5, item6);
+
+        listView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> {
+                if(newValue != null){
+                    TodoItem item = listView.getSelectionModel().getSelectedItem();
+                    itemTextArea.setText(item.getTitle());
+                }
+        });
         listView.getItems().setAll(items);
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-    }
-
-    @FXML
-    public void handleClickListView(){
-        TodoItem item = listView.getSelectionModel().getSelectedItem();
-        itemTextArea.setText(item.getTitle());
-        deadlineLabel.setText(item.getDeadline().toString());
+        listView.getSelectionModel().selectFirst();
     }
 }
