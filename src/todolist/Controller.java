@@ -1,14 +1,16 @@
 package todolist;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextArea;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
+import javafx.scene.layout.BorderPane;
 import todolist.model.TodoData;
 import todolist.model.TodoItem;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
 
 public class Controller {
 
@@ -16,6 +18,7 @@ public class Controller {
     @FXML private TextArea itemTextArea;
     @FXML private ListView<TodoItem> listView;
     @FXML private Label deadlineLabel;
+    @FXML private BorderPane mainBorderPane;
 
     public void initialize(){
 
@@ -33,5 +36,28 @@ public class Controller {
         listView.getItems().setAll(items);
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listView.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    public void showNewItemDialog(){
+        Dialog<ButtonType> dialog = new Dialog<>();
+        dialog.initOwner(mainBorderPane.getScene().getWindow());
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("todoitemDialog.fxml"));
+            dialog.getDialogPane().setContent(root);
+        } catch (IOException ex) {
+            System.out.println("Couldn't load the dialog");
+            ex.printStackTrace();
+        }
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK){
+            System.out.println("Ok pressed");
+        } else {
+            System.out.println("Cancel pressed");
+        }
     }
 }
