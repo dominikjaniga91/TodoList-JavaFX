@@ -8,12 +8,10 @@ import todolist.model.TodoData;
 import todolist.model.TodoItem;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 
 public class Controller {
 
-    private List<TodoItem> items;
     @FXML private TextArea itemTextArea;
     @FXML private ListView<TodoItem> listView;
     @FXML private Label deadlineLabel;
@@ -21,7 +19,6 @@ public class Controller {
 
     public void initialize(){
 
-        items = TodoData.getInstance().getItems();
         listView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
@@ -32,7 +29,7 @@ public class Controller {
                     deadlineLabel.setText(formatter.format(item.getDeadline()));
                 }
         });
-        listView.getItems().setAll(items);
+        listView.setItems(TodoData.getInstance().getItems());
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listView.getSelectionModel().selectFirst();
     }
@@ -56,11 +53,7 @@ public class Controller {
         if(result.isPresent() && result.get() == ButtonType.OK){
             DialogController controller = loader.getController();
             TodoItem newItem = controller.createNewTodoItem();
-            listView.getItems().setAll(items);
             listView.getSelectionModel().select(newItem);
-            System.out.println("Ok pressed");
-        } else {
-            System.out.println("Cancel pressed");
         }
     }
 }

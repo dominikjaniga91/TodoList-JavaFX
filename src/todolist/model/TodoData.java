@@ -1,6 +1,7 @@
 package todolist.model;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -9,13 +10,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.List;
 
 public class TodoData {
 
     private static TodoData instance = new TodoData();
     private static String fileName = "TodoListItems.txt";
-    private List<TodoItem> items;
+    private ObservableList<TodoItem> items;
 
     public static TodoData getInstance(){
         return instance;
@@ -24,7 +24,7 @@ public class TodoData {
     private TodoData(){
     }
 
-    public List<TodoItem> getItems() {
+    public ObservableList<TodoItem> getItems() {
         return items;
     }
 
