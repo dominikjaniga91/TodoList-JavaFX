@@ -55,8 +55,9 @@ public class Controller {
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK){
             DialogController controller = loader.getController();
-            controller.createNewTodoItem();
+            TodoItem newItem = controller.createNewTodoItem();
             listView.getItems().setAll(items);
+            listView.getSelectionModel().select(newItem);
             System.out.println("Ok pressed");
         } else {
             System.out.println("Cancel pressed");
