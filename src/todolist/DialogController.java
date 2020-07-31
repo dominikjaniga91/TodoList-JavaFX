@@ -15,12 +15,14 @@ public class DialogController {
     @FXML private TextArea descriptionArea;
     @FXML private DatePicker deadlinePicker;
 
-    public void createNewTodoItem(){
+    public TodoItem createNewTodoItem(){
         String title = titleField.getText().trim();
         String description = descriptionArea.getText().trim();
         LocalDate created = LocalDate.now();
         LocalDate deadline = deadlinePicker.getValue();
+        TodoItem newItem = new TodoItem(title, description, created, deadline);
+        TodoData.getInstance().addTodoItem(newItem);
 
-        TodoData.getInstance().addTodoItem(new TodoItem(title, description, created, deadline));
+        return newItem;
     }
 }
