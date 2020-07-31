@@ -29,7 +29,7 @@ public class Controller {
                 if(newValue != null){
                     TodoItem item = listView.getSelectionModel().getSelectedItem();
                     itemTextArea.setText(item.getTitle());
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     deadlineLabel.setText(formatter.format(item.getDeadline()));
                 }
         });

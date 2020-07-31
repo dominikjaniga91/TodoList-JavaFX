@@ -8,8 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 import java.util.List;
 
 public class TodoData {
@@ -38,8 +37,8 @@ public class TodoData {
                 String[] fileItems = line.split("\t");
                 String title = fileItems[0];
                 String description = fileItems[1];
-                LocalDateTime created = LocalDateTime.parse(fileItems[2]);
-                LocalDateTime deadline = LocalDateTime.parse(fileItems[3]);
+                LocalDate created = LocalDate.parse(fileItems[2]);
+                LocalDate deadline = LocalDate.parse(fileItems[3]);
                 TodoItem item = new TodoItem(title, description, created, deadline);
                 items.add(item);
             }

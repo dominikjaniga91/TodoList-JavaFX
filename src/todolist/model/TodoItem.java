@@ -1,15 +1,15 @@
 package todolist.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class TodoItem {
 
     private String title;
     private String description;
-    private LocalDateTime createDate;
-    private LocalDateTime deadline;
+    private LocalDate createDate;
+    private LocalDate deadline;
 
-    public TodoItem(String title, String description, LocalDateTime createDate, LocalDateTime deadline) {
+    public TodoItem(String title, String description, LocalDate createDate, LocalDate deadline) {
         this.title = title;
         this.description = description;
         this.createDate = createDate;
@@ -32,19 +32,19 @@ public class TodoItem {
         this.description = description;
     }
 
-    public LocalDateTime getCreateDate() {
+    public LocalDate getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDateTime createDate) {
+    public void setCreateDate(LocalDate createDate) {
         this.createDate = createDate;
     }
 
-    public LocalDateTime getDeadline() {
+    public LocalDate getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(LocalDateTime deadline) {
+    public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
     }
 
