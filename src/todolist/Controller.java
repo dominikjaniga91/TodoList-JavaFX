@@ -2,7 +2,6 @@ package todolist;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import todolist.model.TodoData;
@@ -42,10 +41,10 @@ public class Controller {
     public void showNewItemDialog(){
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainBorderPane.getScene().getWindow());
-
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("todoitemDialog.fxml"));
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("todoitemDialog.fxml"));
-            dialog.getDialogPane().setContent(root);
+            dialog.getDialogPane().setContent(loader.load());
         } catch (IOException ex) {
             System.out.println("Couldn't load the dialog");
             ex.printStackTrace();
@@ -55,6 +54,9 @@ public class Controller {
 
         Optional<ButtonType> result = dialog.showAndWait();
         if(result.isPresent() && result.get() == ButtonType.OK){
+            DialogController controller = loader.getController();
+            controller.createNewTodoItem();
+            listView.getItems().setAll(items);
             System.out.println("Ok pressed");
         } else {
             System.out.println("Cancel pressed");

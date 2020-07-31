@@ -28,6 +28,10 @@ public class TodoData {
         return items;
     }
 
+    public void addTodoItem(TodoItem todoItem) {
+        items.add(todoItem);
+    }
+
     public void loadTodoItemsFromFile() {
         items = FXCollections.observableArrayList();
         Path path = Paths.get(fileName);
