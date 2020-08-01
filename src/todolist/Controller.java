@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import todolist.model.TodoData;
 import todolist.model.TodoItem;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
@@ -32,7 +34,26 @@ public class Controller {
         listView.setItems(TodoData.getInstance().getItems());
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listView.getSelectionModel().selectFirst();
+        listView.setCellFactory(todoItemListView -> new ListCell<>() {
+            @Override
+            protected void updateItem(TodoItem todoItem, boolean empty) {
+                super.updateItem(todoItem, empty);
+                if (empty) {
+                    setText(null);
+                } else {
+                    setText(todoItem.getTitle());
+                    if(deadlineDateIsTodayOrPast(todoItem)){
+                        setTextFill(Color.RED);
+                    }
+                }
+            }
+        });
     }
+
+    private boolean deadlineDateIsTodayOrPast(TodoItem todoItem){
+        return todoItem.getDeadline().isBefore(LocalDate.now().plusDays(1));
+    }
+
 
     @FXML
     public void showNewItemDialog(){
