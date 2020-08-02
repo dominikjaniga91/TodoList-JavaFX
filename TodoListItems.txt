@@ -4,3 +4,4 @@ Call to mother	null	2020-07-28	2020-07-29
 Plan weekend in Tatra mountains	null	2020-07-28	2020-07-31
 Buy staff for weeding	null	2020-07-28	2020-08-06
 Clean yur room	null	2020-07-28	2020-08-03
+Todays item	todays item	2020-08-02	2020-08-02

@@ -1,5 +1,6 @@
 package todolist;
 
+import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ public class Controller {
     @FXML private Label deadlineLabel;
     @FXML private BorderPane mainBorderPane;
     @FXML private ContextMenu contextMenu;
+    @FXML private ToggleButton filterToggleButton;
 
     public void initialize() {
 
@@ -74,6 +76,16 @@ public class Controller {
         return todoItem.getDeadline().isBefore(LocalDate.now().plusDays(1));
     }
 
+    @FXML
+    public void selectTodayEvent(){
+        if (filterToggleButton.isSelected()){
+            FilteredList<TodoItem> filteredList = new FilteredList<>(TodoData.getInstance().getItems(), item -> item.getDeadline().equals(LocalDate.now()));
+            listView.setItems(filteredList);
+            listView.getSelectionModel().selectFirst();
+        } else {
+            listView.setItems(TodoData.getInstance().getItems());
+        }
+    }
     @FXML
     public void sortItemsByDeadline(){
         SortedList<TodoItem> sortedList = new SortedList<>(TodoData.getInstance().getItems(),
