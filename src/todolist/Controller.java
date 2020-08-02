@@ -3,6 +3,8 @@ package todolist;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import todolist.model.TodoData;
@@ -68,6 +70,16 @@ public class Controller {
 
     private boolean deadlineDateIsTodayOrPast(TodoItem todoItem){
         return todoItem.getDeadline().isBefore(LocalDate.now().plusDays(1));
+    }
+
+    @FXML
+    public void handleDeleteKeyPressed(KeyEvent event){
+        TodoItem selectedItem = listView.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            if (event.getCode().equals(KeyCode.DELETE)) {
+                deleteItem(selectedItem);
+            }
+        }
     }
 
 

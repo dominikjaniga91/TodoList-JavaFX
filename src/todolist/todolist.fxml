@@ -24,7 +24,7 @@
         </MenuBar>
     </top>
     <left>
-        <ListView fx:id="listView"  editable="true">
+        <ListView fx:id="listView" onKeyPressed="#handleDeleteKeyPressed" editable="true">
 
         </ListView>
     </left>
