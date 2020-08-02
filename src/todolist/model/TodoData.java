@@ -66,4 +66,8 @@ public class TodoData {
             System.out.println(ex.getMessage());
         }
     }
+
+    public void deleteTodoItem(TodoItem item) {
+        items.remove(item);
+    }
 }

@@ -18,35 +18,51 @@ public class Controller {
     @FXML private ListView<TodoItem> listView;
     @FXML private Label deadlineLabel;
     @FXML private BorderPane mainBorderPane;
+    @FXML private ContextMenu contextMenu;
 
-    public void initialize(){
+    public void initialize() {
+
+        contextMenu = createContextMenu();
 
         listView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
-                if(newValue != null){
-                    TodoItem item = listView.getSelectionModel().getSelectedItem();
-                    itemTextArea.setText(item.getTitle());
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    deadlineLabel.setText(formatter.format(item.getDeadline()));
-                }
-        });
+                    if (newValue != null) {
+                        TodoItem item = listView.getSelectionModel().getSelectedItem();
+                        itemTextArea.setText(item.getTitle());
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        deadlineLabel.setText(formatter.format(item.getDeadline()));
+                    }
+                });
         listView.setItems(TodoData.getInstance().getItems());
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         listView.getSelectionModel().selectFirst();
-        listView.setCellFactory(todoItemListView -> new ListCell<>() {
-            @Override
-            protected void updateItem(TodoItem todoItem, boolean empty) {
-                super.updateItem(todoItem, empty);
-                if (empty) {
-                    setText(null);
-                } else {
-                    setText(todoItem.getTitle());
-                    if(deadlineDateIsTodayOrPast(todoItem)){
-                        setTextFill(Color.RED);
+        listView.setCellFactory(todoItemListView -> {
+
+            ListCell<TodoItem> cell = new ListCell<>() {
+                @Override
+                protected void updateItem(TodoItem todoItem, boolean empty) {
+                    super.updateItem(todoItem, empty);
+                    if (empty) {
+                        setText(null);
+                    } else {
+                        setText(todoItem.getTitle());
+                        if (deadlineDateIsTodayOrPast(todoItem)) {
+                            setTextFill(Color.RED);
+                        }
                     }
                 }
-            }
+            };
+
+            cell.emptyProperty().addListener((observable, wasEmpty, isEmpty) -> {
+                if (isEmpty) {
+                    cell.setContextMenu(null);
+                } else {
+                    cell.setContextMenu(contextMenu);
+                }
+            });
+
+            return cell;
         });
     }
 
@@ -76,5 +92,35 @@ public class Controller {
             TodoItem newItem = controller.createNewTodoItem();
             listView.getSelectionModel().select(newItem);
         }
+    }
+
+    public void deleteItem(TodoItem item){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete todo item");
+        alert.setHeaderText("Delete item: " + item.getTitle() );
+        alert.setContentText("Are you sure? ");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && (result.get() == ButtonType.OK)) {
+            TodoData.getInstance().deleteTodoItem(item);
+        }
+    }
+
+    private ContextMenu createContextMenu(){
+
+        MenuItem deleteMenuItem = getDeleteOption();
+        ContextMenu contextMenu = new ContextMenu();
+        contextMenu.getItems().addAll(deleteMenuItem);
+        return contextMenu;
+    }
+
+    private MenuItem getDeleteOption(){
+
+        MenuItem deleteMenuItem = new MenuItem("Delete");
+        deleteMenuItem.setOnAction(actionEvent -> {
+            TodoItem item = listView.getSelectionModel().getSelectedItem();
+            deleteItem(item);
+        });
+
+        return deleteMenuItem;
     }
 }
