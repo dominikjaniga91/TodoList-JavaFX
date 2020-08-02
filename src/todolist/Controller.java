@@ -1,5 +1,6 @@
 package todolist;
 
+import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -12,6 +13,7 @@ import todolist.model.TodoItem;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Optional;
 
 public class Controller {
@@ -73,6 +75,13 @@ public class Controller {
     }
 
     @FXML
+    public void sortItemsByDeadline(){
+        SortedList<TodoItem> sortedList = new SortedList<>(TodoData.getInstance().getItems(),
+                Comparator.comparing(TodoItem::getDeadline));
+        listView.setItems(sortedList);
+    }
+
+    @FXML
     public void handleDeleteKeyPressed(KeyEvent event){
         TodoItem selectedItem = listView.getSelectionModel().getSelectedItem();
         if (selectedItem != null) {
@@ -81,7 +90,6 @@ public class Controller {
             }
         }
     }
-
 
     @FXML
     public void showNewItemDialog(){
@@ -135,4 +143,7 @@ public class Controller {
 
         return deleteMenuItem;
     }
+
+
+
 }
