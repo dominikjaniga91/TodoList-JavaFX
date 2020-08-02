@@ -7,8 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import todolist.model.TodoData;
 
-import java.io.IOException;
-
 public class Main extends Application {
 
     @Override
@@ -25,7 +23,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void init() throws Exception {
+    public void init() {
         TodoData.getInstance().loadTodoItemsFromFile();
     }
 
