@@ -2,7 +2,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <BorderPane fx:id="mainBorderPane" fx:controller="todolist.Controller"
-            xmlns:fx="http://javafx.com/fxml">
+            xmlns:fx="http://javafx.com/fxml"
+            stylesheets="@view/style/style.css">
     <top>
         <VBox>
             <MenuBar>
@@ -16,10 +17,14 @@
             </MenuBar>
             <ToolBar>
                 <HBox>
-                    <Button text="sort by deadline" onAction="#sortItemsByDeadline" />
-                    <ToggleButton fx:id="filterToggleButton" text="Today's item" onAction="#selectTodayEvent">
+                    <Button  fx:id="sortButton" styleClass="toolsButtons" onAction="#sortItemsByDeadline" >
                         <tooltip>
-                            <Tooltip text="Show today's items only" />
+                            <Tooltip text="Sort by deadline" />
+                        </tooltip>
+                    </Button>
+                    <ToggleButton fx:id="filterToggleButton" styleClass="toolsButtons" onAction="#selectTodayEvent">
+                        <tooltip>
+                            <Tooltip text="Today's events" />
                         </tooltip>
                     </ToggleButton>
                 </HBox>
