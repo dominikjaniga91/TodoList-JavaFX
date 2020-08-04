@@ -17,7 +17,7 @@
             </MenuBar>
             <ToolBar>
                 <HBox>
-                    <Button text="sort by deadline" onAction="#sortItemsByDeadline" />
+                    <Button id="sortButton" onAction="#sortItemsByDeadline" />
                     <ToggleButton fx:id="filterToggleButton" text="Today's item" onAction="#selectTodayEvent">
                         <tooltip>
                             <Tooltip text="Show today's items only" />

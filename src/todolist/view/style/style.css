@@ -3,3 +3,22 @@
     -fx-control-inner-background: #004466;
     -fx-text-fill: white;
 }
+
+#sortButton {
+    -fx-background-image: url('../icons/026-sort.png');
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 50%;
+    -fx-background-radius: 50% 50%;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+
+}
+
+#sortButton:hover {
+
+    -fx-background-color: #0099cc;
+    -fx-cursor: hand;
+}
