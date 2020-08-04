@@ -18,9 +18,9 @@
             <ToolBar>
                 <HBox>
                     <Button id="sortButton" onAction="#sortItemsByDeadline" />
-                    <ToggleButton fx:id="filterToggleButton" text="Today's item" onAction="#selectTodayEvent">
+                    <ToggleButton fx:id="filterToggleButton" styleClass="toolsButtons" onAction="#selectTodayEvent">
                         <tooltip>
-                            <Tooltip text="Show today's items only" />
+                            <Tooltip text="Today's events" />
                         </tooltip>
                     </ToggleButton>
                 </HBox>
