@@ -15,9 +15,12 @@
                     </items>
                 </Menu>
             </MenuBar>
-            <ToolBar>
-                <HBox>
-                    <Button  fx:id="sortButton" styleClass="toolsButtons" onAction="#sortItemsByDeadline" >
+        </VBox>
+    </top>
+    <left>
+        <HBox>
+                <VBox id="leftPanel">
+                    <Button  fx:id="sortButton" styleClass="toolsButtons" onAction="#sortItemsByDeadline"  >
                         <tooltip>
                             <Tooltip text="Sort by deadline" />
                         </tooltip>
@@ -27,14 +30,17 @@
                             <Tooltip text="Today's events" />
                         </tooltip>
                     </ToggleButton>
-                </HBox>
-            </ToolBar>
-        </VBox>
-    </top>
-    <left>
-        <ListView fx:id="listView" onKeyPressed="#handleDeleteKeyPressed" editable="true">
+                    <Button  id="newItem" styleClass="toolsButtons" onAction="#showNewItemDialog"  >
+                        <tooltip>
+                            <Tooltip text="Add new item" />
+                        </tooltip>
+                    </Button>
+                </VBox>
+            <ListView fx:id="listView" onKeyPressed="#handleDeleteKeyPressed" editable="true">
 
-        </ListView>
+            </ListView>
+        </HBox>
+
     </left>
     <center>
         <VBox>
