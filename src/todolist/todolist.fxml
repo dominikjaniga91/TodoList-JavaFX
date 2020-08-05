@@ -30,6 +30,11 @@
                             <Tooltip text="Today's events" />
                         </tooltip>
                     </ToggleButton>
+                    <Button  id="newItem" styleClass="toolsButtons" onAction="#showNewItemDialog"  >
+                        <tooltip>
+                            <Tooltip text="Add new item" />
+                        </tooltip>
+                    </Button>
                 </VBox>
             <ListView fx:id="listView" onKeyPressed="#handleDeleteKeyPressed" editable="true">
 

@@ -30,6 +30,10 @@
     -fx-background-size: 30px;
 }
 
+#newItem {
+    -fx-background-image: url('../icons/add.png');
+}
+
 #filterToggleButton:selected {
     -fx-background-color: #0099cc;
 }
